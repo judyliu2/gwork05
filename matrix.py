@@ -5,16 +5,40 @@ def make_bezier():
     m[0][0] = -1
     m[0][1] = 3
     m[0][2] = -3
-    m[0][3] = 1
-    pass
+    m[1][0] = 3
+    m[1][1] = -6
+    m[1][2] = 3
+    m[2][0] = -3
+    m[2][1] = 3
+    m[3][0] = 1
+
+    return m
 
 def make_hermite():
     m = new_matrix()
-    pass
+    m[0][0] = 2
+    m[0][1] = -3
+    m[0][3] = 1
+    m[1][0] = -2
+    m[1][1] = 3
+    m[2][0] = 1
+    m[2][1] = -2
+    m[2][2] = 1 
+    m[3][0] = 1
+    m[3][1] = -1
+    return m
 
 def generate_curve_coefs( p1, p2, p3, p4, t ):
-    
-    pass
+    #t = 0-1
+    coefs = new_matrix(4,1)
+
+    #hermite
+    coefs[0][0] = 2*p1 - 2*p4 + (p2 - p1) + (p4 - p3)
+    coefs[0][1] = -3*p1 + 3*p4 - 2*(p2-p1) -(p4-p3)
+    coefs[0][2] = p2-p1
+    coefs[0][3] = p1
+    return coefs
+
 
 
 def make_translate( x, y, z ):
