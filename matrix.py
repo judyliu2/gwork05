@@ -5,6 +5,7 @@ def make_bezier():
     m[0][0] = -1
     m[0][1] = 3
     m[0][2] = -3
+    m[0][3] = 1
     m[1][0] = 3
     m[1][1] = -6
     m[1][2] = 3
@@ -26,17 +27,22 @@ def make_hermite():
     m[2][2] = 1 
     m[3][0] = 1
     m[3][1] = -1
+   
     return m
 
 def generate_curve_coefs( p1, p2, p3, p4, t ):
-    #t = 0-1
+ 
     coefs = new_matrix(4,1)
-
+    coefs[0][0] = p1
+    coefs[0][1] = p2
+    coefs[0][2] = p3
+    coefs[0][3] = p4
     #hermite
-    coefs[0][0] = 2*p1 - 2*p4 + (p2 - p1) + (p4 - p3)
-    coefs[0][1] = -3*p1 + 3*p4 - 2*(p2-p1) -(p4-p3)
-    coefs[0][2] = p2-p1
-    coefs[0][3] = p1
+    if (t == 0):
+        matrix_mult(make_hermite(), coefs)
+    #bezier
+    else:
+        matrix_mult(make_bezier(),coefs)
     return coefs
 
 
